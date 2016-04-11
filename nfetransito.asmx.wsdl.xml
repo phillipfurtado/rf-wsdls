@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/transitoNFe" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.portalfiscal.inf.br/transitoNFe" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/transitoNFe">
+      <s:element name="consultarRegistrosPassagem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="chaveAcesso" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultarRegistrosPassagemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="consultarRegistrosPassagemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="registrarPassagem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="passagem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="registrarPassagemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="registrarPassagemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="consultarRegistrosPassagemSoapIn">
+    <wsdl:part name="parameters" element="tns:consultarRegistrosPassagem" />
+  </wsdl:message>
+  <wsdl:message name="consultarRegistrosPassagemSoapOut">
+    <wsdl:part name="parameters" element="tns:consultarRegistrosPassagemResponse" />
+  </wsdl:message>
+  <wsdl:message name="registrarPassagemSoapIn">
+    <wsdl:part name="parameters" element="tns:registrarPassagem" />
+  </wsdl:message>
+  <wsdl:message name="registrarPassagemSoapOut">
+    <wsdl:part name="parameters" element="tns:registrarPassagemResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NfeTransitoSoap">
+    <wsdl:operation name="consultarRegistrosPassagem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consultar a NF-e e histórico de registros de passagem.</wsdl:documentation>
+      <wsdl:input message="tns:consultarRegistrosPassagemSoapIn" />
+      <wsdl:output message="tns:consultarRegistrosPassagemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="registrarPassagem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Registrar passagem de mercadorias acobertadas por NF-e.</wsdl:documentation>
+      <wsdl:input message="tns:registrarPassagemSoapIn" />
+      <wsdl:output message="tns:registrarPassagemSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NfeTransitoSoap" type="tns:NfeTransitoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="consultarRegistrosPassagem">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/transitoNFe/consultarRegistrosPassagem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarPassagem">
+      <soap:operation soapAction="http://www.portalfiscal.inf.br/transitoNFe/registrarPassagem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NfeTransitoSoap12" type="tns:NfeTransitoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="consultarRegistrosPassagem">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/transitoNFe/consultarRegistrosPassagem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarPassagem">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/transitoNFe/registrarPassagem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NfeTransito">
+    <wsdl:port name="NfeTransitoSoap" binding="tns:NfeTransitoSoap">
+      <soap:address location="https://www1.nfe.fazenda.gov.br/nfetransito/nfetransito.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NfeTransitoSoap12" binding="tns:NfeTransitoSoap12">
+      <soap12:address location="https://www1.nfe.fazenda.gov.br/nfetransito/nfetransito.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
